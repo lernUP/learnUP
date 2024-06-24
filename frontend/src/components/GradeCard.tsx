@@ -13,7 +13,7 @@ interface GradeCardProps {
 export function GradeCard({ className, teacherCount, studentCount }: GradeCardProps) {
   return (
     <GradeCardContainer>
-      <CardContent sx={{ justifyContent: 'flex-end', padding: '5px' }}>
+      <CardContent sx={{ padding: '5px', justifyContent: 'space-between' }}>
         <EditButton className="editButton" variant={'plain'}>
           <EditIcon className="editIcon" style={{ fontSize: 27 }} />
         </EditButton>
@@ -75,8 +75,9 @@ const EditButton = styled(Button)`
 
   &:hover {
     background: #3cc2b1;
-    & .MuiSvgIcon-root {
-      color: #3cc2b1 !important;
+    .editIcon {
+      transition: 0.4s;
+      color: white !important;
     }
   }
 `;

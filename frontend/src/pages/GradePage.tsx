@@ -30,6 +30,7 @@ export function GradePage() {
             />
           );
         })}
+        {grades && grades.length % 3 === 2 && <EmptyItem />}
       </GradesCardWrapper>
     </ContentSection>
   );
@@ -38,8 +39,12 @@ export function GradePage() {
 const GradesCardWrapper = styled('div')`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
   gap: 30px;
   width: 100%;
+`;
+
+const EmptyItem = styled('div')`
+  width: 360px;
 `;
