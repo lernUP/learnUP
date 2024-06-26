@@ -25,7 +25,7 @@ public class SchoolService(
     public fun getAllSchools(): List<SchoolDto> = schoolDao.fetchAllSchools().map(::mapToDto)
 
     public fun getAllSchoolsForAdmin(userId: UUID): List<SchoolDto> = schoolDao.fetchAllSchoolsForAdmin(userId).map(
-        ::mapToDto,
+        ::mapToDto
     )
 
     public fun createSchool(createSchoolDto: CreateSchoolDto) {
