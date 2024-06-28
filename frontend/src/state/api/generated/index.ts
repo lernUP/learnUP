@@ -8,6 +8,7 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { CreateGradeDto } from './models/CreateGradeDto';
+export type { CreateStudentDto } from './models/CreateStudentDto';
 export type { CreateUserDto } from './models/CreateUserDto';
 export type { GradeDetailsDto } from './models/GradeDetailsDto';
 export type { GradeDto } from './models/GradeDto';
