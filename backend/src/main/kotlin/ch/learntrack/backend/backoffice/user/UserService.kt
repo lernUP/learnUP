@@ -1,7 +1,5 @@
 package ch.learntrack.backend.backoffice.user
 
-import ch.learntrack.backend.backoffice.school.SchoolDto
-import ch.learntrack.backend.backoffice.school.fetchAllSchoolsForAdmin
 import ch.learntrack.backend.common.EntityService
 import ch.learntrack.backend.common.LearnTrackBadRequestException
 import ch.learntrack.backend.common.LearnTrackConflictException
@@ -37,9 +35,7 @@ public class UserService(
     )
 
     //broken, I can't figure it out
-    public fun getTeacherCounts(schoolId: UUID): List<UserDto> = userDao.countTeachersInSchool(schoolId).map(
-        ::mapToDto
-    )
+    public fun getUserCount(schoolId: UUID, userRole: UserRole): Int = userDao.countTeachersInSchool(schoolId, userRole)
 
     public fun createAdminUser(createUserDto: CreateUserDto) {
         val emailLowerCase = createUserDto.email.trim().lowercase()

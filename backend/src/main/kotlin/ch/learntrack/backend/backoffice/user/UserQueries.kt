@@ -1,11 +1,8 @@
 package ch.learntrack.backend.backoffice.user
 
 import ch.learntrack.backend.persistence.UserRole
-import ch.learntrack.backend.persistence.tables.daos.SchoolDao
 import ch.learntrack.backend.persistence.tables.daos.UserDao
-import ch.learntrack.backend.persistence.tables.pojos.School
 import ch.learntrack.backend.persistence.tables.pojos.User
-import ch.learntrack.backend.persistence.tables.references.SCHOOL
 import ch.learntrack.backend.persistence.tables.references.USER
 import ch.learntrack.backend.persistence.tables.references.USER_SCHOOL
 import java.util.*
@@ -28,22 +25,12 @@ public fun UserDao.fetchAllAdminsForSchool(schoolId: UUID): MutableList<User> = 
     .into(User::class.java)
 
 //can't figure it out
-public fun UserDao.countTeachersInSchool(schoolId: UUID): Int? = ctx()
+public fun UserDao.countTeachersInSchool(schoolId: UUID, userRole: UserRole): Int = ctx()
     .selectCount()
     .from(USER_SCHOOL)
     .join(USER)
     .on(USER.ID.eq(USER_SCHOOL.USER_ID))
     .where(USER_SCHOOL.SCHOOL_ID.eq(schoolId))
-    .and(USER.USER_ROLE.eq(UserRole.TEACHER))
+    .and(USER.USER_ROLE.eq(userRole))
     .fetchOne(0, Int::class.java)
-
-//same here
-public fun UserDao.countStudentsInSchool(schoolId: UUID): Int? = ctx()
-    .selectCount()
-    .from(USER_SCHOOL)
-    .join(USER)
-    .on(USER.ID.eq(USER_SCHOOL.USER_ID))
-    .where(USER_SCHOOL.SCHOOL_ID.eq(schoolId))
-    .and(USER.USER_ROLE.eq(UserRole.STUDENT))
-    .fetchOne(0, Int::class.java)
-
+    ?:0

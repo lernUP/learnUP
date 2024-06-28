@@ -1,7 +1,7 @@
 package ch.learntrack.backend.backoffice.user
 
 import ch.learntrack.backend.backoffice.BACKOFFICE_ROOT_URL
-import ch.learntrack.backend.backoffice.school.SchoolDto
+import ch.learntrack.backend.persistence.UserRole
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -20,5 +20,8 @@ public class UserResource(private val userService: UserService) {
 
     //please someone who is smarter than me (me=Shay) fix this
     @GetMapping("/getTeacherCounts")
-    public fun getTeacherCounts(@RequestParam schoolId: UUID): List<UserDto> = userService.getTeacherCounts(schoolId)
+    public fun getTeacherCounts(@RequestParam schoolId: UUID): Int = userService.getUserCount(schoolId, UserRole.TEACHER)
+
+    @GetMapping("/getStudentCounts")
+    public fun getStudentCounts(@RequestParam schoolId: UUID): Int = userService.getUserCount(schoolId, UserRole.STUDENT)
 }
