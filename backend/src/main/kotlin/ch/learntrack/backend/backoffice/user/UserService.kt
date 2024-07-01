@@ -34,7 +34,6 @@ public class UserService(
         ::mapToDto
     )
 
-    //broken, I can't figure it out
     public fun getUserCount(schoolId: UUID, userRole: UserRole): Int = userDao.countTeachersInSchool(schoolId, userRole)
 
     public fun createAdminUser(createUserDto: CreateUserDto) {

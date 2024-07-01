@@ -24,7 +24,6 @@ public fun UserDao.fetchAllAdminsForSchool(schoolId: UUID): MutableList<User> = 
     .fetch()
     .into(User::class.java)
 
-//can't figure it out
 public fun UserDao.countTeachersInSchool(schoolId: UUID, userRole: UserRole): Int = ctx()
     .selectCount()
     .from(USER_SCHOOL)
