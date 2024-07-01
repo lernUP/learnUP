@@ -2,6 +2,7 @@ package ch.learntrack.backend.persistence
 
 import ch.learntrack.backend.persistence.tables.daos.UserDao
 import ch.learntrack.backend.persistence.tables.pojos.User
+import ch.learntrack.backend.persistence.tables.references.SUBJECT
 import ch.learntrack.backend.persistence.tables.references.USER
 import ch.learntrack.backend.persistence.tables.references.USER_GRADE
 import ch.learntrack.backend.persistence.tables.references.USER_SCHOOL
@@ -34,3 +35,11 @@ public fun UserDao.searchUserByUserRoleAndEmailSearchQuery(email: String, userRo
     .and(USER.USER_ROLE.eq(userRole))
     .fetch()
     .into(User::class.java)
+
+public fun UserDao.fetchUserBySubjectId(subjectId: UUID): User? = ctx()
+    .select()
+    .from(USER)
+    .join(SUBJECT)
+    .on(USER.ID.eq(SUBJECT.TEACHER_ID))
+    .where(SUBJECT.ID.eq(subjectId))
+    .fetchOneInto(User::class.java)
